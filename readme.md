@@ -93,4 +93,23 @@
 Для файлов в состояниях `staged` и `modified` обычно не указывают, что они также `tracked`, потому что это состояние подразумевается.
 **!!! Обратите внимание:** `staged` и `modified` может быть у одного файла, но у разных его версий, в случае если файл изменили после коммита.
 
+#### Цикл жизни файлов в Git
+
+```mermaid  
+flowchart TD; 
+classDef class1 fill:#99FFCC, stroke:#000, stroke-width:4px, color:black;
+classDef class2 fill:#FF6666, stroke:#000, stroke-width:4px, color:black;
+
+A[/Untracked/]:::class2;
+B[staged +tracked]:::class1;
+C((tracked)):::class1;
+D[modified]:::class2;
+
+A-->|git add|B;  
+B-->|git commit|C;  
+B-.изменения.->D;  
+C-.изменения.->D;
+D-->|git add|B;
+```
+
 
